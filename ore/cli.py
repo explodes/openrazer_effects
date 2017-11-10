@@ -13,10 +13,11 @@ class Program(object):
         self.parser = optparse.OptionParser(usage="""usage: %prog command [args...] [--audio-device=<device>]
 
 Valid commands:
-    list            List all effects
-    run <effect>    Run an effect
-    audiolist       List audio devices that *should* work
-    audiotest       Test all audio devices
+    list               List all effects
+    run <effect>       Run an effect
+    audiolist          List audio devices that *should* work
+    audiotest          Test all audio devices
+    audiotest <device> Test a single audio device
 
 """.strip())
         self.parser.add_option(
@@ -60,7 +61,13 @@ Valid commands:
     def audiotest(self, *args, **kwargs):
         import pyaudio
         p = pyaudio.PyAudio()
-        graph_all_devices(p)
+
+        device_names = None
+        if len(args) > 1:
+            device_name = args[1]
+            device_names = [device_name]
+
+        graph_all_devices(p, device_names=device_names)
 
     def list(self, *args, **kwargs):
         reg = get_registry()

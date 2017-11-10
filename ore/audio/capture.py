@@ -211,12 +211,13 @@ def counter(initial=0, step=1):
         i += step
 
 
-def graph_all_devices(p, buffer_size=2 ** 11, buckets=32):
+def graph_all_devices(p, device_names=None, buffer_size=2 ** 11, buckets=32):
     p = pyaudio.PyAudio()
     finder = DeviceFinder(p)
 
-    device_names = [device["name"] for device in finder.find_input_devices() if " " not in device["name"]]
-    print("have devices: {}".format(", ".join(device_names)))
+    if device_names is None:
+        device_names = [device["name"] for device in finder.find_input_devices() if " " not in device["name"]]
+        print("have devices: {}".format(", ".join(device_names)))
 
     graphs = [DeviceGraph(
         p,
