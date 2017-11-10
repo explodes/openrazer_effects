@@ -2,8 +2,9 @@ from __future__ import print_function
 
 import optparse
 import sys
+import time
 
-from ore.audio.capture import DeviceFinder, graph_all_devices
+from ore.audio.capture import DeviceFinder, graph_audio_devices
 from ore.registry.registry import get_registry
 
 
@@ -13,11 +14,10 @@ class Program(object):
         self.parser = optparse.OptionParser(usage="""usage: %prog command [args...] [--audio-device=<device>]
 
 Valid commands:
-    list               List all effects
-    run <effect>       Run an effect
-    audiolist          List audio devices that *should* work
-    audiotest          Test all audio devices
-    audiotest <device> Test a single audio device
+    list                                    List all effects
+    run <effect> [--audio-device=<device>]  Run an effect
+    audiolist                               List audio devices that *should* work
+    audiotest [--audio-device=<device>]     Test a single audio device
 
 """.strip())
         self.parser.add_option(
@@ -62,12 +62,13 @@ Valid commands:
         import pyaudio
         p = pyaudio.PyAudio()
 
-        device_names = None
-        if len(args) > 1:
-            device_name = args[1]
-            device_names = [device_name]
+        audio_device = kwargs["audio_device"]
 
-        graph_all_devices(p, device_names=device_names)
+        print("** Testing audio device: {} **".format(audio_device))
+        time.sleep(1)
+
+        device_names = [audio_device]
+        graph_audio_devices(p, device_names)
 
     def list(self, *args, **kwargs):
         reg = get_registry()
