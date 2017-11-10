@@ -1,5 +1,3 @@
-import pyaudio
-
 from openrazer.client.devices.keyboard import RazerKeyboard
 from ore.audio.capture import DeviceGraph
 from ore.core.effects import KeyboardEffect
@@ -22,12 +20,18 @@ class Equalizer(KeyboardEffect):
     def get_author(self):
         return "explodes"
 
-    def __init__(self, device_name):
-        p = pyaudio.PyAudio()
-        self.graph = DeviceGraph(p, device_name, buckets=14)
-        self.keyboard = find_keyboard()
+    def __init__(self, audio_device="default", **kwargs):
+        super(KeyboardEffect, self).__init__(**kwargs)
+        self.audio_device = audio_device
+        self.keyboard = None
+        self.graph = None
 
     def start(self):
+        import pyaudio
+        p = pyaudio.PyAudio()
+        self.graph = DeviceGraph(p, self.audio_device, buckets=14)
+        self.keyboard = find_keyboard()
+
         kb = self.keyboard
         self.init(kb)
         while True:

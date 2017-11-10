@@ -6,9 +6,8 @@ from openrazer.client.devices.keyboard import RazerKeyboard
 
 import openrazer.client
 
-MAX_FPS = 35
-ROWS = 6
 COLS = 22
+ROWS = 6
 
 
 def find_keyboard() -> RazerKeyboard:

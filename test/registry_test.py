@@ -13,27 +13,29 @@ def is_str(s):
     return type(s) in six.string_types
 
 
-@pytest.mark.parametrize("cli_name,effect", get_registry().items())
-def test_effect_conforms_to_Effect(cli_name, effect):
+@pytest.mark.parametrize("cli_name,effect_class", get_registry().items())
+def test_effect_conforms_to_Effect(cli_name, effect_class):
     # cli_name
     assert is_str(cli_name)
 
-    c = effect.get_cli_name(None)
+    effect = effect_class(audio_device="default")
+
+    c = effect.get_cli_name()
     assert c == cli_name
 
     assert is_str(cli_name)
 
     # name
-    assert is_str(effect.get_name(None))
+    assert is_str(effect.get_name())
 
     # author
-    assert is_str(effect.get_author(None))
+    assert is_str(effect.get_author())
 
     # type
-    assert effect.get_type(None) in ["keyboard", "mouse"]
+    assert effect.get_effect_type() in ["keyboard", "mouse"]
 
     # description
-    description = effect.get_description(None)
+    description = effect.get_description()
     if description is not None:
         assert is_str(description)
 

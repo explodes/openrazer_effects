@@ -1,4 +1,17 @@
 class Effect(object):
+    """
+    Effect interface.
+
+    All Effects are subject to this interface.
+    """
+
+    def __init__(self, **kwargs):
+        """
+        Constructor must accepts kwargs.
+
+        audio_device is passed in to connect with local audio devices.
+        """
+        pass
 
     def get_name(self):
         """
@@ -24,7 +37,7 @@ class Effect(object):
         """
         raise NotImplementedError()
 
-    def get_type(self):
+    def get_effect_type(self):
         """
         The type of this effect. Either "keyboard" or "mouse"
         """
@@ -38,10 +51,18 @@ class Effect(object):
 
 
 class KeyboardEffect(Effect):
-    def get_type(self):
+
+    def __init__(self, **kwargs):
+        super(Effect, self).__init__(**kwargs)
+
+    def get_effect_type(self):
         return "keyboard"
 
 
 class MouseEffect(Effect):
-    def get_type(self):
+
+    def __init__(self, **kwargs):
+        super(Effect, self).__init__(**kwargs)
+
+    def get_effect_type(self):
         return "mouse"

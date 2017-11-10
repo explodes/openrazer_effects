@@ -47,7 +47,13 @@ class Explosion(object):
 
 
 @register_effect
-class Effect(KeyboardProgram):
+class ExplosionEffect(KeyboardProgram):
+
+    def __init__(self, **kwargs):
+        super(KeyboardProgram, self).__init__(**kwargs)
+        self.num_explosions = 3
+        self.explosions = self.make_explosions()
+        self.clear_every_frame = False
 
     def get_name(self):
         return "Explosions"
@@ -60,12 +66,6 @@ class Effect(KeyboardProgram):
 
     def get_author(self):
         return "explodes"
-
-    def __init__(self, num_explosions=3, debug=False):
-        super(Effect, self).__init__(debug=debug)
-        self.num_explosions = num_explosions
-        self.explosions = self.make_explosions()
-        self.clear_every_frame = False
 
     def make_explosions(self, darken=1):
         return [self.make_explosion(darken=darken) for _ in range(self.num_explosions)]
@@ -98,5 +98,5 @@ class Effect(KeyboardProgram):
 
 
 if __name__ == '__main__':
-    effect = Effect(debug=True)
+    effect = ExplosionEffect()
     effect.start()
