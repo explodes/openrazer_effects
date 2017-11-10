@@ -12,7 +12,7 @@ MAX_FPS = 35
 class KeyboardProgram(KeyboardEffect):
 
     def __init__(self, **kwargs):
-        super(KeyboardEffect, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.fps = FpsLimiter(MAX_FPS)
         self.clear_every_frame = True
 

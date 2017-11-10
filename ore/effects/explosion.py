@@ -50,7 +50,7 @@ class Explosion(object):
 class ExplosionEffect(KeyboardProgram):
 
     def __init__(self, **kwargs):
-        super(KeyboardProgram, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.num_explosions = 3
         self.explosions = self.make_explosions()
         self.clear_every_frame = False

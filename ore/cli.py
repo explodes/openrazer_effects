@@ -10,10 +10,18 @@ from ore.registry.registry import get_registry
 class Program(object):
 
     def __init__(self):
-        self.parser = optparse.OptionParser(usage="usage: %prog command [args...] [--audio-device=<device>]")
+        self.parser = optparse.OptionParser(usage="""usage: %prog command [args...] [--audio-device=<device>]
+
+Valid commands:
+    list            List all effects
+    run <effect>    Run an effect
+    audiolist       List audio devices that *should* work
+    audiotest       Test all audio devices
+
+""".strip())
         self.parser.add_option(
             "-a",
-            "--audio_device",
+            "--audio-device",
             dest="audio_device",
             default="default",
             help="name of the audio device to pair with, if used.")
@@ -91,3 +99,7 @@ class Program(object):
 def main():
     prog = Program()
     prog._parse_and_execute(sys.argv[1:])
+
+
+if __name__ == "__main__":
+    main()

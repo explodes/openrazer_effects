@@ -20,7 +20,7 @@ def snake_order(row, col, top_left=True):
 class Effect(KeyboardProgram):
 
     def __init__(self, **kwargs):
-        super(KeyboardProgram, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
     def get_name(self):
         return "Double Snakes"

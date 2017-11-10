@@ -53,7 +53,7 @@ class Effect(object):
 class KeyboardEffect(Effect):
 
     def __init__(self, **kwargs):
-        super(Effect, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
     def get_effect_type(self):
         return "keyboard"
@@ -62,7 +62,7 @@ class KeyboardEffect(Effect):
 class MouseEffect(Effect):
 
     def __init__(self, **kwargs):
-        super(Effect, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
     def get_effect_type(self):
         return "mouse"

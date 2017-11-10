@@ -21,7 +21,7 @@ class Equalizer(KeyboardEffect):
         return "explodes"
 
     def __init__(self, audio_device="default", **kwargs):
-        super(KeyboardEffect, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.audio_device = audio_device
         self.keyboard = None
         self.graph = None
