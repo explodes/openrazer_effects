@@ -11,8 +11,11 @@ A collection of effects to use with [OpenRazer](https://openrazer.github.io/)
 `openrazer_effects list`
 List all effects
 
+`openrazer_run <effect> [--audio-device=<device>]`
+Run an effect for a specific audio device.
+
 `openrazer_effects audiolist`
 List available audio devices
 
-`openrazer_run <effect> [--audio-device=<device>]`
-Run an effect for a specific audio device.
+`openrazer_effects audiotest`
+Test capture of available audio devices. Can be crashy!!

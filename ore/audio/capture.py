@@ -11,11 +11,17 @@ class DeviceFinder(object):
         self.p = p
 
     def find_output_devices(self):
+        """
+        Find devices suitable for writing.
+        """
         for device in self.devicesiter():
             if device["maxOutputChannels"] > 0:
                 yield device
 
     def find_input_devices(self):
+        """
+        Find devices suitable for recording.
+        """
         for device in self.devicesiter():
             if device["maxInputChannels"] > 0:
                 yield device
@@ -205,15 +211,19 @@ def counter(initial=0, step=1):
         i += step
 
 
-def main(buffer_size=2 ** 11, buckets=64):
+def graph_all_devices(p, buffer_size=2 ** 11, buckets=32):
     p = pyaudio.PyAudio()
     finder = DeviceFinder(p)
-    print("have devices: {}".format(", ".join(device["name"] for device in finder.find_input_devices())))
 
-    # device_names = ["HDA ATI SB: ALC892 Alt Analog (hw:0,2)", "default", "pulse"]
-    device_names = ["pulse"]
-    graphs = [DeviceGraph(p, device_name, buffer_size=buffer_size, buckets=buckets)
-              for device_name in device_names]
+    device_names = [device["name"] for device in finder.find_input_devices() if " " not in device["name"]]
+    print("have devices: {}".format(", ".join(device_names)))
+
+    graphs = [DeviceGraph(
+        p,
+        device_name,
+        buffer_size=buffer_size,
+        buckets=buckets)
+        for device_name in device_names]
 
     for index in counter():
         print("{:>5}".format(index), end=" :: ")
@@ -224,4 +234,5 @@ def main(buffer_size=2 ** 11, buckets=64):
 
 
 if __name__ == "__main__":
-    main()
+    p = pyaudio.PyAudio()
+    graph_all_devices(p)

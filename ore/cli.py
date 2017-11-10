@@ -3,6 +3,7 @@ from __future__ import print_function
 import optparse
 import sys
 
+from ore.audio.capture import DeviceFinder, graph_all_devices
 from ore.registry.registry import get_registry
 
 
@@ -32,6 +33,26 @@ class Program(object):
 
     def _error(self, msg):
         self.parser.error(msg)
+
+    def audiolist(self, *args, **kwargs):
+        import pyaudio
+        p = pyaudio.PyAudio()
+
+        device_finder = DeviceFinder(p)
+
+        devices = list(device_finder.find_input_devices())
+        if len(devices) == 0:
+            print("Sorry, no devices found.")
+            return
+
+        print("** Audio Devices **")
+        for dev in devices:
+            print(dev["name"])
+
+    def audiotest(self, *args, **kwargs):
+        import pyaudio
+        p = pyaudio.PyAudio()
+        graph_all_devices(p)
 
     def list(self, *args, **kwargs):
         reg = get_registry()
