@@ -16,6 +16,7 @@ def register_effect(effect: Effect):
     if cli_name in _REGISTRY:
         raise ValueError("effect {} already registered.".format(cli_name))
     _REGISTRY[cli_name] = effect
+    return effect
 
 
 def get_registry():
