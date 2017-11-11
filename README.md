@@ -4,16 +4,9 @@ A collection of effects to use with [OpenRazer](https://openrazer.github.io/)
 
 ## Installation
 
-[Python 3.5+](https://www.python.org/downloads/release/python-350/) is required.
-
- - Virtual environments are always recommended.
- - `virtualenv --python="$(which python3.5)" venv && source venv/bin/activate`
-
-Some additional packages are required for your system.
-
  - Install [OpenRazer](https://openrazer.github.io/)
  - Install other packages
-   - Debian: `sudo apt install `
+   - Debian Python 3.6: `sudo apt install python3.6-dev portaudio19-dev libdbus-1-dev libdbus-glib-1-dev`
 
  - Install `openrazer_effects`
    - `pip install openrazer_effects`
