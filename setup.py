@@ -12,7 +12,7 @@ setup(
     description="Effects for OpenRazer",
     url="https://github.com/explodes/openrazer_effects",
     author="Evan Leis",
-    version="1.0.3",
+    version="1.0.4",
     packages=find_packages(".", exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     install_requires=[
         "dbus-python==1.2.4",

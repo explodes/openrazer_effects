@@ -52,7 +52,7 @@ class Equalizer(KeyboardEffect):
         half = COLS // 2
 
         for col, p in enumerate(values):
-            self.draw_column(matrix, half - col, p)
+            self.draw_column(matrix, half - col - 1, p)
             self.draw_column(matrix, half + col, p)
 
         return True
