@@ -106,7 +106,10 @@ Valid commands:
 
 def main():
     prog = Program()
-    prog._parse_and_execute(sys.argv[1:])
+    try:
+        prog._parse_and_execute(sys.argv[1:])
+    except KeyboardInterrupt:
+        print("Goodbye!")
 
 
 if __name__ == "__main__":
