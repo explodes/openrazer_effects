@@ -1,8 +1,5 @@
 import time
-import typing
 
-from openrazer.client.devices.keyboard import RazerKeyboard
-from openrazer.client.fx import Frame
 from ore.core.effects import KeyboardEffect
 from ore.core.utils import FpsLimiter, find_keyboard
 
@@ -22,7 +19,7 @@ class KeyboardProgram(KeyboardEffect):
         self.init(self.keyboard)
         self.loop(self.keyboard)
 
-    def loop(self, kb: RazerKeyboard):
+    def loop(self, kb):
 
         stop = False
         last_timestamp = time.time()
@@ -47,8 +44,8 @@ class KeyboardProgram(KeyboardEffect):
             self.fps.wait_for_next_frame()
             frame += 1
 
-    def init(self, kb: RazerKeyboard):
+    def init(self, kb):
         raise NotImplementedError()
 
-    def draw(self, kb: RazerKeyboard, matrix: Frame, frame_num: int, dt: float) -> typing.Any:
+    def draw(self, kb, matrix, frame_num, dt):
         raise NotImplementedError()

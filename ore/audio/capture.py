@@ -228,4 +228,3 @@ def graph_audio_devices(p, device_names, buffer_size=2 ** 11, buckets=32):
             graph.read_row()
             print("{}: {}".format(graph.device_name, graph.histogram), end=" ")
         print("\n", end="")
-

@@ -1,8 +1,5 @@
 import sys
 import time
-import typing
-
-from openrazer.client.devices.keyboard import RazerKeyboard
 
 import openrazer.client
 
@@ -10,7 +7,7 @@ COLS = 22
 ROWS = 6
 
 
-def find_keyboard() -> RazerKeyboard:
+def find_keyboard():
     device_manager = openrazer.client.DeviceManager()
 
     for device in device_manager.devices:
@@ -28,16 +25,14 @@ def find_keyboard() -> RazerKeyboard:
     return keyboard
 
 
-def index_to_coord(index: int) -> typing.Tuple[int, int]:
+def index_to_coord(index):
     index = index % (ROWS * COLS)
     col = index % COLS
     row = index // COLS
     return row, col
 
 
-
-
-def int_to_color(v: int) -> typing.Tuple[int, int, int]:
+def int_to_color(v):
     r = (v & 0xff0000) >> 16
     g = (v & 0x00ff00) >> 8
     b = (v & 0xff)

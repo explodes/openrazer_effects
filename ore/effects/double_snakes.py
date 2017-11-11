@@ -1,8 +1,5 @@
 #!/usr/bin/env python3.6
-import typing
 
-from openrazer.client.devices.keyboard import RazerKeyboard
-from openrazer.client.fx import Frame
 from ore.core.program import KeyboardProgram
 from ore.core.utils import ROWS, COLS, index_to_coord
 from ore.registry.registry import register_effect
@@ -34,10 +31,10 @@ class Effect(KeyboardProgram):
     def get_author(self):
         return "explodes"
 
-    def init(self, kb: RazerKeyboard):
+    def init(self, kb):
         kb.brightness = 100
 
-    def draw(self, kb: RazerKeyboard, matrix: Frame, frame_num: int, dt: float) -> typing.Any:
+    def draw(self, kb, matrix, frame_num, dt):
         snake_len = (ROWS * COLS) // 5
         snake_div = int(255 / snake_len)
 

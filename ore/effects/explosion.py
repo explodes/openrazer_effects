@@ -1,10 +1,7 @@
 #!/usr/bin/env python3.6
 import math
 import random
-import typing
 
-from openrazer.client.devices.keyboard import RazerKeyboard
-from openrazer.client.fx import Frame
 from ore.core.program import KeyboardProgram
 from ore.core.utils import ROWS, COLS
 from ore.registry.registry import register_effect
@@ -24,7 +21,7 @@ class Explosion(object):
     def expand(self, delta=0.45):
         self.radius += delta
 
-    def write_to(self, matrix: Frame) -> bool:
+    def write_to(self, matrix):
         delta = 360 / self.resolution
         row, col = self.center
 
@@ -82,10 +79,10 @@ class ExplosionEffect(KeyboardProgram):
         )
         return Explosion(center=(row, col), color=color)
 
-    def init(self, kb: RazerKeyboard):
+    def init(self, kb):
         kb.brightness = 100
 
-    def draw(self, kb: RazerKeyboard, matrix: Frame, frame_num: int, dt: float) -> typing.Any:
+    def draw(self, kb, matrix, frame_num, dt):
 
         if frame_num % 15 == 0:
             # matrix.reset()
