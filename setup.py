@@ -7,8 +7,8 @@ setup(
     description="Effects for OpenRazer",
     url="https://github.com/explodes/openrazer_effects",
     author="Evan Leis",
-    version="1.0.5",
-    packages=find_packages(".", exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
+    version="1.0.6",
+    packages=find_packages(".", exclude=["*.test", "*.test.*", "test.*", "test"]),
     install_requires=[
         "dbus-python==1.2.4",
         "numpy==1.13.3",
