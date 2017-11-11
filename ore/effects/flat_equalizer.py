@@ -1,7 +1,7 @@
 from openrazer.client.devices.keyboard import RazerKeyboard
 from ore.audio.capture import DeviceGraph
 from ore.core.effects import KeyboardEffect
-from ore.core.utils import find_keyboard, COLS, ROWS
+from ore.core.utils import find_keyboard, ROWS
 from ore.registry.registry import register_effect
 
 
@@ -9,13 +9,13 @@ from ore.registry.registry import register_effect
 class Equalizer(KeyboardEffect):
 
     def get_name(self):
-        return "Graphic Equalizer"
+        return "Graphi Equalizer"
 
     def get_description(self):
-        return "Green fire on midnight background, radiating from the middle."
+        return "Green fire on midnight background, spanning the keyboard."
 
     def get_cli_name(self):
-        return "eq"
+        return "flat-eq"
 
     def get_author(self):
         return "explodes"
@@ -29,7 +29,7 @@ class Equalizer(KeyboardEffect):
     def start(self):
         import pyaudio
         p = pyaudio.PyAudio()
-        self.graph = DeviceGraph(p, self.audio_device, buckets=14)
+        self.graph = DeviceGraph(p, self.audio_device, buckets=22)
         self.keyboard = find_keyboard()
 
         kb = self.keyboard
@@ -45,17 +45,12 @@ class Equalizer(KeyboardEffect):
 
     def loop(self, kb: RazerKeyboard):
         self.graph.read_row()
-        values = self.graph.histogram.values[:11]
+        values = self.graph.histogram.values[:22]
 
         matrix = kb.fx.advanced.matrix
 
-        half = COLS // 2
-
         for col, p in enumerate(values):
-            col = col * 2
             self.draw_column(matrix, col, p)
-            self.draw_column(matrix, col+1, p)
-            #self.draw_column(matrix, COLS - col - 1, p)
 
         return True
 
