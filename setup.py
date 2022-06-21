@@ -11,7 +11,7 @@ setup(
     packages=find_packages(".", exclude=["*.test", "*.test.*", "test.*", "test"]),
     install_requires=[
         "dbus-python==1.2.4",
-        "numpy==1.13.3",
+        "numpy==1.22.0",
         "pgi==0.0.11.1",
         "PyAudio==0.2.11",
         "six==1.11.0",
